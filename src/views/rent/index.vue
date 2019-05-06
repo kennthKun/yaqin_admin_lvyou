@@ -29,15 +29,13 @@
             <el-form-item label="价格">
               <span>{{ props.row.price}}</span>
             </el-form-item>
-             <el-form-item label="电话">
+            <el-form-item label="电话">
               <span>{{ props.row.phone}}</span>
             </el-form-item>
             <el-form-item label="租车环境">
               <el-upload
                 class="upload-demo"
                 action="http://yaqin.ckun.vip:8081/file_upload"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
                 :file-list="props.row.imageList"
                 list-type="picture"
               >
@@ -113,7 +111,7 @@
       <el-table-column label="价格" prop="price"></el-table-column>
       <el-table-column label="电话" prop="phone"></el-table-column>
     </el-table>
-<!-- 增加 -->
+    <!-- 增加 -->
     <el-dialog title="商品编辑" :visible.sync="dialogFormVisible2">
       <el-form :model="form">
         <el-form-item label="租车名称" :label-width="formLabelWidth">
@@ -148,11 +146,10 @@
         <el-form-item label="价格" :label-width="formLabelWidth">
           <el-input v-model="form.price" auto-complete="off"></el-input>
         </el-form-item>
-        
+
         <el-form-item label="租车电话" :label-width="formLabelWidth">
           <el-input v-model="form.phone" auto-complete="off"></el-input>
         </el-form-item>
-         
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible2 = false">取 消</el-button>
@@ -196,7 +193,7 @@ export default {
         shop: "",
         price: "",
         shopId: "",
-        phone:"",
+        phone: "",
         imageList: ""
       },
       formLabelWidth: "75px",
@@ -210,17 +207,17 @@ export default {
           shop: "北京",
           shopId: "10333",
           price: 45,
-          phone:13126929429,
+          phone: 13126929429,
           imageList: [
-
             {
-              name:"123",
-              url:"https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg",
-
+              name: "123",
+              url:
+                "https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg"
             },
             {
-              name:"123",
-              url:"https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
+              name: "123",
+              url:
+                "https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
             }
           ]
         },
@@ -231,18 +228,19 @@ export default {
           desc: "故宫自2019年春节起，实行除夕当日闭馆",
           address: "北京市东城区景山前街4号",
           shop: "北京",
-          shopId: "10333", phone:13126929429,
+          shopId: "10333",
+          phone: 13126929429,
           price: 45,
           imageList: [
-
             {
-              name:"123",
-              url:"https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg",
-
+              name: "123",
+              url:
+                "https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg"
             },
             {
-              name:"123",
-              url:"https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
+              name: "123",
+              url:
+                "https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
             }
           ]
         },
@@ -253,17 +251,19 @@ export default {
           desc: "故宫自2019年春节起，实行除夕当日闭馆",
           address: "北京市东城区景山前街4号",
           shop: "北京",
-          shopId: "10333", phone:13126929429,
+          shopId: "10333",
+          phone: 13126929429,
           price: 45,
           imageList: [
             {
-              name:"123",
-              url:"https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg",
-
+              name: "123",
+              url:
+                "https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg"
             },
             {
-              name:"123",
-              url:"https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
+              name: "123",
+              url:
+                "https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
             }
           ]
         },
@@ -273,19 +273,20 @@ export default {
           category: "租车",
           desc: "故宫自2019年春节起，实行除夕当日闭馆",
           address: "北京市东城区景山前街4号",
-          shop: "北京", phone:13126929429,
+          shop: "北京",
+          phone: 13126929429,
           shopId: "10333",
           price: 45,
           imageList: [
-
             {
-              name:"123",
-              url:"https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg",
-
+              name: "123",
+              url:
+                "https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg"
             },
             {
-              name:"123",
-              url:"https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
+              name: "123",
+              url:
+                "https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
             }
           ]
         }
@@ -328,7 +329,7 @@ export default {
         shop: "",
         price: "",
         shopId: "",
-        phone:""
+        phone: ""
       };
     },
     create2() {
@@ -345,7 +346,7 @@ export default {
         shop: "",
         price: "",
         shopId: "",
-        phone:""
+        phone: ""
       };
     }
   }

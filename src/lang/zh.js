@@ -1,8 +1,17 @@
 export default {
   route: {
+    admin:"admin",
+    guide:"导游管理",
+    rent:"租车管理",
+    hotel:"酒店管理",
+    ticket:"门票管理",
+    Specialty:"特产文章",
+    Delicious:"美食文章",
+    Strategy:"攻略文章",
+    complexTable:"用户中心",
     dashboard: '首页',
     documentation: '文档',
-    guide: '引导页',
+    guide: '导游管理',
     permission: '权限测试页',
     rolePermission: '角色权限',
     pagePermission: '页面权限',

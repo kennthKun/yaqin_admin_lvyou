@@ -51,7 +51,7 @@ export const constantRoutes = [
       }
     ]
   },
-//  用户中心
+  //  用户中心
   {
     path: '',
     component: Layout,
@@ -59,7 +59,7 @@ export const constantRoutes = [
       {
         path: 'complex-table',
         component: () => import('@/views/admin/complex-table'),
-        name: '用户中心',
+        name: 'admin',
         meta: { title: 'admin', icon: 'person' }
       }
     ]
@@ -71,27 +71,27 @@ export const constantRoutes = [
     redirect: '/Strategy/list',
     name: 'Strategy',
     meta: {
-      title: '攻略文章',
+      title: 'Strategy',
       icon: 'strategy'
     },
     children: [
       {
         path: 'example/create',
         component: () => import('@/views/strategy/example/create'),
-        name: 'CreateArticle',
+        name: 'StrategyCreateArticle',
         meta: { title: 'createArticle', icon: 'edit' }
       },
       {
         path: 'edit/:id(\\d+)',
         component: () => import('@/views/strategy/example/edit'),
-        name: 'EditArticle',
+        name: 'StrategyEditArticle',
         meta: { title: 'editArticle', noCache: true, activeMenu: '/example/list' },
         hidden: true
       },
       {
         path: 'list',
         component: () => import('@/views/strategy/example/list'),
-        name: 'ArticleList',
+        name: 'StrategyArticleList',
         meta: { title: 'articleList', icon: 'list' }
       }
     ]
@@ -102,27 +102,27 @@ export const constantRoutes = [
     redirect: '/example/list',
     name: 'Delicious',
     meta: {
-      title: '美食文章',
+      title: 'Delicious',
       icon: 'delicious'
     },
     children: [
       {
         path: 'create',
         component: () => import('@/views/example/create'),
-        name: 'CreateArticle',
+        name: 'DeliciousCreateArticle',
         meta: { title: 'createArticle', icon: 'edit' }
       },
       {
         path: 'edit/:id(\\d+)',
         component: () => import('@/views/example/edit'),
-        name: 'EditArticle',
+        name: 'DeliciousEditArticle',
         meta: { title: 'editArticle', noCache: true, activeMenu: '/example/list' },
         hidden: true
       },
       {
         path: 'list',
         component: () => import('@/views/example/list'),
-        name: 'ArticleList',
+        name: 'DeliciousArticleList',
         meta: { title: 'articleList', icon: 'list' }
       }
     ]
@@ -133,27 +133,27 @@ export const constantRoutes = [
     redirect: '/example/list',
     name: 'Specialty',
     meta: {
-      title: '特产文章',
+      title: 'Specialty',
       icon: 'specialty'
     },
     children: [
       {
         path: 'create',
         component: () => import('@/views/example/create'),
-        name: 'CreateArticle',
+        name: 'SpecialtyCreateArticle',
         meta: { title: 'createArticle', icon: 'edit' }
       },
       {
         path: 'edit/:id(\\d+)',
         component: () => import('@/views/example/edit'),
-        name: 'EditArticle',
+        name: 'SpecialtyEditArticle',
         meta: { title: 'editArticle', noCache: true, activeMenu: '/example/list' },
         hidden: true
       },
       {
         path: 'list',
         component: () => import('@/views/example/list'),
-        name: 'ArticleList',
+        name: 'SpecialtyArticleList',
         meta: { title: 'articleList', icon: 'list' }
       }
     ]
@@ -167,7 +167,7 @@ export const constantRoutes = [
         path: 'complex-table',
         component: () => import('@/views/ticket/Index'),
         name: 'ticket',
-        meta: { title: '门票管理', icon: 'ticket' }
+        meta: { title: 'ticket', icon: 'ticket' }
       }
     ]
   },
@@ -180,7 +180,7 @@ export const constantRoutes = [
         path: 'complex-table',
         component: () => import('@/views/hotel/index'),
         name: 'hotel',
-        meta: { title: '酒店管理', icon: 'hotel' }
+        meta: { title: 'hotel', icon: 'hotel' }
       }
     ]
   },
@@ -193,12 +193,12 @@ export const constantRoutes = [
         path: 'complex-table',
         component: () => import('@/views/rent/index'),
         name: 'rent',
-        meta: { title: '租车管理', icon: 'car' }
+        meta: { title: 'rent', icon: 'car' }
       }
     ]
   },
   //导游 
-   {
+  {
     path: '/guide',
     component: Layout,
     children: [
@@ -206,7 +206,7 @@ export const constantRoutes = [
         path: 'complex-table',
         component: () => import('@/views/guide/index'),
         name: 'guide',
-        meta: { title: '导游管理', icon: 'daoyou' }
+        meta: { title: 'guide', icon: 'daoyou' }
       }
     ]
   },
@@ -350,7 +350,7 @@ export const asyncRoutes = [
   // // nestedRouter,
   // tableRouter,
 
-  
+
 
   // {
   //   path: '/tab',

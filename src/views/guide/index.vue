@@ -36,8 +36,7 @@
               <el-upload
                 class="upload-demo"
                 action="http://yaqin.ckun.vip:8081/file_upload"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
+           
                 :file-list="props.row.imageList"
                 list-type="picture"
               >

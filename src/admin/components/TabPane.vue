@@ -62,7 +62,7 @@
     },
     methods: {
       handleEdit(index, row) {
-        //  this.tableData.splice(index,1);
+         this.tableData.splice(index,1);
       },
       handleDelete(index, row) {
          this.tableData.splice(index,1);
