@@ -176,6 +176,7 @@
 </style>
 
 <script>
+	import axios from 'axios'
 import { constants } from "crypto";
 export default {
   data() {
@@ -185,16 +186,12 @@ export default {
       dialogVisible: false,
       dialogFormVisible2: false,
       form: {
-        id: "",
-        name: "",
-        category: "",
-        shopId: "",
-        address: "",
-        shop: "",
-        price: "",
-        shopId: "",
-        phone: "",
-        imageList: ""
+        name: '',
+        phone: '',
+        introduce: '',
+        scenic_spot: '',
+        category: '',
+        price: ''
       },
       formLabelWidth: "75px",
       tableData5: [
@@ -221,78 +218,13 @@ export default {
             }
           ]
         },
-        {
-          id: "2",
-          name: "颐和园租车",
-          category: "租车",
-          desc: "故宫自2019年春节起，实行除夕当日闭馆",
-          address: "北京市东城区景山前街4号",
-          shop: "北京",
-          shopId: "10333",
-          phone: 13126929429,
-          price: 45,
-          imageList: [
-            {
-              name: "123",
-              url:
-                "https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg"
-            },
-            {
-              name: "123",
-              url:
-                "https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
-            }
-          ]
-        },
-        {
-          id: "3",
-          name: "天安门租车",
-          category: "租车",
-          desc: "故宫自2019年春节起，实行除夕当日闭馆",
-          address: "北京市东城区景山前街4号",
-          shop: "北京",
-          shopId: "10333",
-          phone: 13126929429,
-          price: 45,
-          imageList: [
-            {
-              name: "123",
-              url:
-                "https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg"
-            },
-            {
-              name: "123",
-              url:
-                "https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
-            }
-          ]
-        },
-        {
-          id: "4",
-          name: "天坛租车",
-          category: "租车",
-          desc: "故宫自2019年春节起，实行除夕当日闭馆",
-          address: "北京市东城区景山前街4号",
-          shop: "北京",
-          phone: 13126929429,
-          shopId: "10333",
-          price: 45,
-          imageList: [
-            {
-              name: "123",
-              url:
-                "https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg"
-            },
-            {
-              name: "123",
-              url:
-                "https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
-            }
-          ]
-        }
+        
       ]
     };
   },
+  created() {
+    		this.getlist()
+  		},
   methods: {
     hand: function(e) {},
     exit: function(e) {
@@ -315,22 +247,17 @@ export default {
         })
         .catch(_ => {});
     },
-    create() {
-      this.form.id =
-        parseInt(this.tableData5[this.tableData5.length - 1].id) + 1;
-      this.tableData5.push(this.form);
-      this.dialogFormVisible = false;
-      this.form = {
-        id: "",
-        name: "",
-        category: "",
-        shopId: "",
-        address: "",
-        shop: "",
-        price: "",
-        shopId: "",
-        phone: ""
-      };
+    
+    getlist() {
+      var that = this
+      axios.get('http://localhost:3002/drivers/api')
+        .then(function(response) {
+          that.tableData5 = response.data.data
+          console.log(that.tableData5)
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     },
     create2() {
       this.form.id =

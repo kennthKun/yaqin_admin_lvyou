@@ -1,7 +1,7 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
-
+import axios from 'axios'
 const state = {
   token: getToken(),
   name: '',
@@ -30,61 +30,70 @@ const mutations = {
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
-    return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+ 
+  login({ commit }, data) {
+  	 	var that = this;	
+    const { username, password } = data
+//  console.log(data)
+    var params = new URLSearchParams()
+    params.append('username', data.username)
+    params.append('password', data.password)
+   	return axios.post('http://yaqin.ckun.vip:3002/user/login', params)
+	  .then(function(response) {
+	  	console.log(response)
+	    if (response.data.code == 20000) {
+	    		console.log(response)
+	    		commit('SET_TOKEN', response.data.data)
+        setToken( response.data.data)
+//      that.$router.push({ path: '/' })
+	    }
+	  }).catch(function(error) {
+	    console.log(error)
+	  })
   },
 
   // get user info
   getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
-
-        if (!data) {
-          reject('Verification failed, please Login again.')
-        }
-
-        const { roles, name, avatar, introduction } = data
-
-        // roles must be a non-empty array
-        if (!roles || roles.length <= 0) {
-          reject('getInfo: roles must be a non-null array!')
-        }
-
-        commit('SET_ROLES', roles)
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        commit('SET_INTRODUCTION', introduction)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+//  return new Promise((resolve, reject) => {
+//    getInfo(state.token).then(response => {
+//      const { data } = response
+//
+//      if (!data) {
+//        reject('Verification failed, please Login again.')
+//      }
+//
+//      const { roles, name, avatar, introduction } = data
+//
+//      // roles must be a non-empty array
+//      if (!roles || roles.length <= 0) {
+//        reject('getInfo: roles must be a non-null array!')
+//      }
+//				console.log(data)
+        commit('SET_ROLES', ["admin"])
+        commit('SET_NAME', "Super Admin")
+        commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
+        commit('SET_INTRODUCTION', "I am a super administrator")
+        return {roles:["damin"]}
+//      resolve(data)
+//    }).catch(error => {
+//      reject(error)
+//    })
+//  })
   },
 
   // user logout
   logout({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
+//  return new Promise((resolve, reject) => {
+//    logout(state.token).then(() => {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         removeToken()
         resetRouter()
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+//      resolve()
+//    }).catch(error => {
+//      reject(error)
+//    })
+//  })
   },
 
   // remove token

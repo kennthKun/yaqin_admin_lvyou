@@ -4,7 +4,7 @@ export default {
     guide:"导游管理",
     rent:"租车管理",
     hotel:"酒店管理",
-    ticket:"门票管理",
+    ticket:"景区管理",
     Specialty:"特产文章",
     Delicious:"美食文章",
     Strategy:"攻略文章",

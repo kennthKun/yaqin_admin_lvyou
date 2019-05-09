@@ -55,18 +55,18 @@
       <div style="position:relative">
         <div class="tips">
           <span>{{ $t('login.username') }} : admin</span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
+          <span>{{ $t('login.password') }} : 111111</span>
         </div>
-        <div class="tips">
+        <!--<div class="tips">
           <span style="margin-right:18px;">
             {{ $t('login.username') }} : editor
           </span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
-        </div>
-
+        </div>-->
+<!--
         <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           {{ $t('login.thirdparty') }}
-        </el-button>
+        </el-button>-->
       </div>
     </el-form>
 
@@ -122,6 +122,7 @@ export default {
   watch: {
     $route: {
       handler: function(route) {
+      		console.log(route)
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
@@ -167,9 +168,12 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          console.log(this.loginForm)
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
-              this.$router.push({ path: this.redirect || '/' })
+            		console.log(22332322)
+//          		console.log(this.redirect)
+              this.$router.push({ path: '/' })
               this.loading = false
             })
             .catch(() => {

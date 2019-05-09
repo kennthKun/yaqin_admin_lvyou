@@ -1,7 +1,7 @@
 <template>
   <div class="createPost-container">
     <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
-      <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
+      <!--<sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
         <CommentDropdown v-model="postForm.comment_disabled" />
         <PlatformDropdown v-model="postForm.platforms" />
         <SourceUrlDropdown v-model="postForm.source_uri" />
@@ -11,10 +11,10 @@
         <el-button v-loading="loading" type="warning" @click="draftForm">
           Draft
         </el-button>
-      </sticky>
+      </sticky>-->
 
       <div class="createPost-main-container">
-        <el-row>
+        <!--<el-row>
           <Warning />
 
           <el-col :span="24">
@@ -55,20 +55,20 @@
               </el-row>
             </div>
           </el-col>
-        </el-row>
+        </el-row>-->
 
-        <el-form-item style="margin-bottom: 40px;" label-width="70px" label="Summary:">
+        <!--<el-form-item style="margin-bottom: 40px;" label-width="70px" label="Summary:">
           <el-input v-model="postForm.content_short" :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please enter the content" />
           <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}words</span>
-        </el-form-item>
+        </el-form-item>-->
 
         <el-form-item prop="content" style="margin-bottom: 30px;">
           <Tinymce ref="editor" v-model="postForm.content" :height="400" />
         </el-form-item>
 
-        <el-form-item prop="image_uri" style="margin-bottom: 30px;">
+        <!--<el-form-item prop="image_uri" style="margin-bottom: 30px;">
           <Upload v-model="postForm.image_uri" />
-        </el-form-item>
+        </el-form-item>-->
       </div>
     </el-form>
   </div>
