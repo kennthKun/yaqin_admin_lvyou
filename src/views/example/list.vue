@@ -14,9 +14,9 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="180px" align="center" label="Date">
+      <el-table-column  align="center" label="Date">
         <template slot-scope="scope">
-          <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ scope.row.display_time | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
 
@@ -43,14 +43,19 @@
         </template>
       </el-table-column>
 
-      <el-table-column min-width="300px" label="Title">
+      <el-table-column min-width="200px" label="Title">
         <template slot-scope="{row}">
           <router-link :to="'/example/edit/'+row.id" class="link-type">
             <span>{{ row.title }}</span>
           </router-link>
         </template>
       </el-table-column>
-
+			<el-table-column class-name="status-col" label="Actions" width="120">
+        <template slot-scope="{row}">
+           <!--<el-button type="danger" size="small" icon="el-icon-edit" @click="delete(row.id)">Delete</el-button>-->
+           <el-button type="danger" size="small" icon="el-icon-delete" @click="deletebtn(row.id)"></el-button>
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="Actions" width="120">
         <template slot-scope="scope">
           <router-link :to="'edit/'+scope.row.id">
@@ -59,19 +64,20 @@
         </template>
       </el-table-column>
     </el-table>
-
+<!--
     <pagination
       v-show="total>0"
       :total="total"
       :page.sync="listQuery.page"
       :limit.sync="listQuery.limit"
       @pagination="getList"
-    />
+    />-->
   </div>
 </template>
 
 <script>
 import { fetchList } from "@/api/article";
+import axios from 'axios'
 import Pagination from "@/components/Pagination"; // Secondary package based on el-pagination
 
 export default {
@@ -102,14 +108,32 @@ export default {
     this.getList();
   },
   methods: {
-    getList() {
-      this.listLoading = true;
-      fetchList(this.listQuery).then(response => {
-        this.list = response.data.items;
-        this.total = response.data.total;
-        this.listLoading = false;
-      });
-    }
+  		getList() {
+  			var that = this;
+  			this.listLoading = true;
+   		axios.get('http://localhost:3002/specialty/api')
+			  .then(function(response) {
+			  			console.log(response)
+			  			that.list = response.data.data;
+		        that.total = response.data.data.length;
+		        that.listLoading = false;
+			  })
+			  .catch(function(error) {
+			    console.log(error)
+			  })
+   	},
+   	deletebtn(id){
+   		console.log(id)
+   		var that = this
+   		axios.get('http://localhost:3002/specialty/delete?id='+id)
+			  .then(function(response) {
+			  			console.log(response)
+			  			that.getList();
+			  })
+			  .catch(function(error) {
+			    console.log(error)
+			  })
+   	}
   }
 };
 </script>
