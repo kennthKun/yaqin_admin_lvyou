@@ -27,10 +27,10 @@
               <span>{{ props.row.desc }}</span>
             </el-form-item>
             <el-form-item label="价格">
-              <span>{{ props.row.price}}</span>
+              <span>{{ props.row.price }}</span>
             </el-form-item>
             <el-form-item label="电话">
-              <span>{{ props.row.phone}}</span>
+              <span>{{ props.row.phone }}</span>
             </el-form-item>
             <el-form-item label="租车环境">
               <el-upload
@@ -64,36 +64,36 @@
               <el-dialog title="商品编辑" :visible.sync="dialogFormVisible">
                 <el-form :model="form">
                   <el-form-item label="租车名称" :label-width="formLabelWidth">
-                    <el-input v-model="form.name" auto-complete="off"></el-input>
+                    <el-input v-model="form.name" auto-complete="off" />
                   </el-form-item>
                   <el-form-item label="所属地区" :label-width="formLabelWidth">
                     <el-select v-model="form.shop" placeholder="请选择地区">
-                      <el-option label="北京" value="shanghai"></el-option>
+                      <el-option label="北京" value="shanghai" />
                     </el-select>
                   </el-form-item>
                   <el-form-item label="营业时间" :label-width="formLabelWidth">
-                    <el-input v-model="form.shopId" auto-complete="off"></el-input>
+                    <el-input v-model="form.shopId" auto-complete="off" />
                   </el-form-item>
                   <el-form-item label="租车分类" :label-width="formLabelWidth">
                     <el-select v-model="form.category" placeholder="请选择分类">
-                      <el-option label="商务性租车" value="商务性租车"></el-option>
-                      <el-option label="度假性租车" value="度假性租车"></el-option>
-                      <el-option label="长住性租车" value="长住性租车"></el-option>
-                      <el-option label="会议性租车" value="会议性租车"></el-option>
-                      <el-option label="观光性租车" value="观光性租车"></el-option>
-                      <el-option label="小型租车" value="小型租车"></el-option>
-                      <el-option label="中型租车" value="中型租车"></el-option>
-                      <el-option label="大型租车" value="大型租车"></el-option>
+                      <el-option label="商务性租车" value="商务性租车" />
+                      <el-option label="度假性租车" value="度假性租车" />
+                      <el-option label="长住性租车" value="长住性租车" />
+                      <el-option label="会议性租车" value="会议性租车" />
+                      <el-option label="观光性租车" value="观光性租车" />
+                      <el-option label="小型租车" value="小型租车" />
+                      <el-option label="中型租车" value="中型租车" />
+                      <el-option label="大型租车" value="大型租车" />
                     </el-select>
                   </el-form-item>
                   <el-form-item label="租车地址" :label-width="formLabelWidth">
-                    <el-input v-model="form.address" auto-complete="off"></el-input>
+                    <el-input v-model="form.address" auto-complete="off" />
                   </el-form-item>
                   <el-form-item label="租车描述" :label-width="formLabelWidth">
-                    <el-input v-model="form.desc" auto-complete="off"></el-input>
+                    <el-input v-model="form.desc" auto-complete="off" />
                   </el-form-item>
                   <el-form-item label="价格" :label-width="formLabelWidth">
-                    <el-input v-model="form.price" auto-complete="off"></el-input>
+                    <el-input v-model="form.price" auto-complete="off" />
                   </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
@@ -105,50 +105,50 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="商品 ID" prop="id"></el-table-column>
-      <el-table-column label="商品名称" prop="name"></el-table-column>
-      <el-table-column label="描述" prop="desc"></el-table-column>
-      <el-table-column label="价格" prop="price"></el-table-column>
-      <el-table-column label="电话" prop="phone"></el-table-column>
+      <el-table-column label="商品 ID" prop="id" />
+      <el-table-column label="商品名称" prop="name" />
+      <el-table-column label="描述" prop="desc" />
+      <el-table-column label="价格" prop="price" />
+      <el-table-column label="电话" prop="phone" />
     </el-table>
     <!-- 增加 -->
     <el-dialog title="商品编辑" :visible.sync="dialogFormVisible2">
       <el-form :model="form">
         <el-form-item label="租车名称" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
+          <el-input v-model="form.name" auto-complete="off" />
         </el-form-item>
         <el-form-item label="所属地区" :label-width="formLabelWidth">
           <el-select v-model="form.shop" placeholder="请选择地区">
-            <el-option label="北京" value="shanghai"></el-option>
+            <el-option label="北京" value="shanghai" />
           </el-select>
         </el-form-item>
         <el-form-item label="营业时间" :label-width="formLabelWidth">
-          <el-input v-model="form.shopId" auto-complete="off"></el-input>
+          <el-input v-model="form.shopId" auto-complete="off" />
         </el-form-item>
         <el-form-item label="租车分类" :label-width="formLabelWidth">
           <el-select v-model="form.category" placeholder="请选择分类">
-            <el-option label="全部租车" value="全部租车"></el-option>
-            <el-option label="自然景观" value="自然景观"></el-option>
-            <el-option label="人文民俗" value="人文民俗"></el-option>
-            <el-option label="漂流" value="漂流"></el-option>
-            <el-option label="人文古镇" value="人文古镇"></el-option>
-            <el-option label="宗教场所" value="宗教场所"></el-option>
-            <el-option label="缆车" value="缆车"></el-option>
-            <el-option label="垂直电梯" value="垂直电梯"></el-option>
+            <el-option label="全部租车" value="全部租车" />
+            <el-option label="自然景观" value="自然景观" />
+            <el-option label="人文民俗" value="人文民俗" />
+            <el-option label="漂流" value="漂流" />
+            <el-option label="人文古镇" value="人文古镇" />
+            <el-option label="宗教场所" value="宗教场所" />
+            <el-option label="缆车" value="缆车" />
+            <el-option label="垂直电梯" value="垂直电梯" />
           </el-select>
         </el-form-item>
         <el-form-item label="租车地址" :label-width="formLabelWidth">
-          <el-input v-model="form.address" auto-complete="off"></el-input>
+          <el-input v-model="form.address" auto-complete="off" />
         </el-form-item>
         <el-form-item label="租车描述" :label-width="formLabelWidth">
-          <el-input v-model="form.desc" auto-complete="off"></el-input>
+          <el-input v-model="form.desc" auto-complete="off" />
         </el-form-item>
         <el-form-item label="价格" :label-width="formLabelWidth">
-          <el-input v-model="form.price" auto-complete="off"></el-input>
+          <el-input v-model="form.price" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="租车电话" :label-width="formLabelWidth">
-          <el-input v-model="form.phone" auto-complete="off"></el-input>
+          <el-input v-model="form.phone" auto-complete="off" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -176,8 +176,8 @@
 </style>
 
 <script>
-	import axios from 'axios'
-import { constants } from "crypto";
+import axios from 'axios'
+import { constants } from 'crypto'
 export default {
   data() {
     return {
@@ -193,34 +193,34 @@ export default {
         category: '',
         price: ''
       },
-      formLabelWidth: "75px",
+      formLabelWidth: '75px',
       tableData5: [
         {
-          id: "0",
-          name: "故宫租车",
-          category: "租车",
-          desc: "故宫自2019年春节起，实行除夕当日闭馆",
-          address: "北京市东城区景山前街4号",
-          shop: "北京",
-          shopId: "10333",
+          id: '0',
+          name: '故宫租车',
+          category: '租车',
+          desc: '故宫自2019年春节起，实行除夕当日闭馆',
+          address: '北京市东城区景山前街4号',
+          shop: '北京',
+          shopId: '10333',
           price: 45,
           phone: 13126929429,
           imageList: [
             {
-              name: "123",
+              name: '123',
               url:
-                "https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg"
+                'https://imgsa.baidu.com/exp/w=500/sign=8ee2dc99afc379317d688629dbc5b784/4d086e061d950a7bf41a505b0ad162d9f2d3c906.jpg'
             },
             {
-              name: "123",
+              name: '123',
               url:
-                "https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large"
+                'https://z1.muscache.cn/im/pictures/4ff69ceb-db3b-4656-951d-f12e8ac3221c.jpg?aki_policy=large'
             }
           ]
-        },
-        
+        }
+
       ]
-    };
+    }
   },
   created() {
     		this.getlist()
@@ -228,26 +228,26 @@ export default {
   methods: {
     hand: function(e) {},
     exit: function(e) {
-      console.log(e);
-      this.dialogFormVisible = true;
-      this.fromIndex = e;
-      console.log(this.form);
-      this.form = this.tableData5[e];
-      console.log(this.form, this.tableData5[e]);
+      console.log(e)
+      this.dialogFormVisible = true
+      this.fromIndex = e
+      console.log(this.form)
+      this.form = this.tableData5[e]
+      console.log(this.form, this.tableData5[e])
     },
     complate: function() {
-      this.tableData5[this.fromIndex] = this.form;
-      this.dialogFormVisible = false;
+      this.tableData5[this.fromIndex] = this.form
+      this.dialogFormVisible = false
     },
     handleClose(done) {
-      this.fromIndex = done;
-      this.$confirm("确认关闭？")
+      this.fromIndex = done
+      this.$confirm('确认关闭？')
         .then(_ => {
-          this.tableData5.splice(this.fromIndex, 1);
+          this.tableData5.splice(this.fromIndex, 1)
         })
-        .catch(_ => {});
+        .catch(_ => {})
     },
-    
+
     getlist() {
       var that = this
       axios.get('http://localhost:3002/drivers/api')
@@ -261,23 +261,23 @@ export default {
     },
     create2() {
       this.form.id =
-        parseInt(this.tableData5[this.tableData5.length - 1].id) + 1;
-      this.tableData5.push(this.form);
-      this.dialogFormVisible2 = false;
+        parseInt(this.tableData5[this.tableData5.length - 1].id) + 1
+      this.tableData5.push(this.form)
+      this.dialogFormVisible2 = false
       this.form = {
-        id: "",
-        name: "",
-        category: "",
-        shopId: "",
-        address: "",
-        shop: "",
-        price: "",
-        shopId: "",
-        phone: ""
-      };
+        id: '',
+        name: '',
+        category: '',
+        shopId: '',
+        address: '',
+        shop: '',
+        price: '',
+        shopId: '',
+        phone: ''
+      }
     }
   }
-};
+}
 </script>
 <style scoped>
 .demo-table-expand .el-form-item {

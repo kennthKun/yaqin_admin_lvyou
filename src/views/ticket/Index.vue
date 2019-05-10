@@ -17,7 +17,7 @@
             <el-form-item label="景区地址">
               <span>{{ props.row.address }}</span>
             </el-form-item>
-            <el-form-item label="景点描述"  style="margin-bottom: 30px;">
+            <el-form-item label="景点描述" style="margin-bottom: 30px;">
               <Tinymce ref="editor" v-model="props.row.introduce" :height="400" />
             </el-form-item>
             <el-form-item label="门票价格">
@@ -27,16 +27,16 @@
               <span>夏季：{{ props.row.sum_start_time }}</span>
               <span>冬季：{{ props.row.winter_start_time }}</span>
             </el-form-item>
-            
+
             <el-form-item label="关闭时间">
               <span>夏季：{{ props.row.sum_end_time }}</span>
               <span>冬季：{{ props.row.winter_end_time }}</span>
             </el-form-item>
-            
+
             <el-form-item label="景区图片">
-              <el-upload class="upload-demo" action="http://yaqin.ckun.vip:8081/file_upload" :file-list="props.row.imageList" list-type="picture">
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+              <el-upload class="upload-demo" action="http://yaqin.ckun.vip:8081/file_upload" :file-list="props.row.longimageList" :on-success="fileListChange" list-type="picture">
+                <!--<el-button size="small" type="primary">点击上传</el-button>-->
+                <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
               </el-upload>
             </el-form-item>
             <el-form-item label="操作">
@@ -64,16 +64,16 @@
                     <el-input v-model="form.price" auto-complete="off" />
                   </el-form-item>
                   <el-form-item label="夏季开放时间" :label-width="formLabelWidth">
-                    <el-time-select v-model="form.sum_start_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}"></el-time-select>
+                    <el-time-select v-model="form.sum_start_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}" />
                   </el-form-item>
                   <el-form-item label="夏季结束时间" :label-width="formLabelWidth">
-                    <el-time-select v-model="form.sum_end_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}"></el-time-select>
+                    <el-time-select v-model="form.sum_end_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}" />
                   </el-form-item>
                   <el-form-item label="冬季开放时间" :label-width="formLabelWidth">
-                    <el-time-select v-model="form.winter_start_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}"></el-time-select>
+                    <el-time-select v-model="form.winter_start_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}" />
                   </el-form-item>
                   <el-form-item label="冬季结束时间" :label-width="formLabelWidth">
-                    <el-time-select v-model="form.winter_end_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}"></el-time-select>
+                    <el-time-select v-model="form.winter_end_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}" />
                   </el-form-item>
                   <el-form-item label="景区分类" :label-width="formLabelWidth">
                     <el-select v-model="form.category" placeholder="请选择分类">
@@ -89,13 +89,15 @@
                   <el-form-item label="景点地址" :label-width="formLabelWidth">
                     <el-input v-model="form.address" auto-complete="off" />
                   </el-form-item>
-                  <!--<el-form-item label="景点描述" :label-width="formLabelWidth">
-                    <el-input type="textarea"  v-model="form.introduce" auto-complete="off" />
-                  </el-form-item>-->
                   <el-form-item label="景点描述" :label-width="formLabelWidth" style="margin-bottom: 30px;">
-					          <Tinymce ref="editor" v-model="form.introduce" :height="400" />
-					        </el-form-item>
-                  
+                    <Tinymce ref="editor" v-model="form.introduce" :height="400" />
+                  </el-form-item>
+								<el-form-item label="景区图片">
+			              <el-upload class="upload-demo" action="http://yaqin.ckun.vip:8081/file_upload" :file-list="form.longimageList" :on-success="fileListChange" list-type="picture">
+			                <el-button size="small" type="primary">点击上传</el-button>
+			                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+			              </el-upload>
+			            </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                   <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -112,7 +114,7 @@
       <el-table-column label="景区分类" prop="category" />
       <el-table-column label="夏季开放时间" prop="sum_start_time" />
       <el-table-column label="夏季结束时间" prop="sum_end_time" />
-       <el-table-column label="冬季开放时间" prop="winter_start_time" />
+      <el-table-column label="冬季开放时间" prop="winter_start_time" />
       <el-table-column label="冬季结束时间" prop="winter_end_time" />
       <el-table-column label="价格" prop="price" />
     </el-table>
@@ -141,19 +143,19 @@
         </el-form-item>
         <el-form-item label="夏季开放时间" :label-width="formLabelWidth">
           <!--<el-input v-model="form.sum_start_time" auto-complete="off" />-->
-           <el-time-select v-model="form.sum_start_time"  :picker-options="{start: '00:00',step: '00:15',end: '24:00'}"></el-time-select>
+          <el-time-select v-model="form.sum_start_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}" />
         </el-form-item>
         <el-form-item label="夏季结束时间" :label-width="formLabelWidth">
           <!--<el-input v-model="form.sum_end_time" auto-complete="off" />-->
-          <el-time-select v-model="form.sum_end_time"  :picker-options="{start: '00:00',step: '00:15',end: '24:00'}"></el-time-select>
+          <el-time-select v-model="form.sum_end_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}" />
         </el-form-item>
         <el-form-item label="冬季开放时间" :label-width="formLabelWidth">
           <!--<el-input v-model="form.winter_start_time" auto-complete="off" />-->
-          <el-time-select v-model="form.winter_start_time"  :picker-options="{start: '00:00',step: '00:15',end: '24:00'}"></el-time-select>
+          <el-time-select v-model="form.winter_start_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}" />
         </el-form-item>
         <el-form-item label="冬季结束时间" :label-width="formLabelWidth">
           <!--<el-input v-model="form.winter_end_time" auto-complete="off" />-->
-          <el-time-select v-model="form.winter_end_time"  :picker-options="{start: '00:00',step: '00:15',end: '24:00'}"></el-time-select>
+          <el-time-select v-model="form.winter_end_time" :picker-options="{start: '00:00',step: '00:15',end: '24:00'}" />
         </el-form-item>
         <el-form-item label="价格" :label-width="formLabelWidth">
           <el-input v-model="form.price" auto-complete="off" />
@@ -161,7 +163,7 @@
         <el-form-item label="景点描述" :label-width="formLabelWidth" style="margin-bottom: 30px;">
           <Tinymce ref="editor" v-model="form.introduce" :height="400" />
         </el-form-item>
-        
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -195,6 +197,7 @@ import axios from 'axios'
 import Tinymce from '@/components/Tinymce'
 import { constants } from 'crypto'
 export default {
+  components: { Tinymce },
   data() {
     return {
       fromIndex: 0,
@@ -202,67 +205,92 @@ export default {
       dialogVisible: false,
       form: {
         name: '',
-        level:'',
+        level: '',
         address: '',
         category: '',
-        sum_start_time:'',
-        sum_end_time:'',
-        winter_start_time:'',
-        winter_end_time:'',
+        sum_start_time: '',
+        sum_end_time: '',
+        winter_start_time: '',
+        winter_end_time: '',
         price: '',
-        introduce:'',
+        introduce: '',
       },
+      shortimagelist:[],
       formLabelWidth: '115px',
       tableData5: []
     }
   },
-  components: { Tinymce },
+  created() {
+    this.getlist()
+  },
   methods: {
-  		getlist(){
+  		getlist() {
   			var that = this
    		axios.get('http://yaqin.ckun.vip:3002/scenic_spot_second/api')
 			  .then(function(response) {
+			  			for(let x in response.data.data){
+			  				let arr = response.data.data[x].imageList.split(",")
+			  				let longarr = [];
+			  				for(let y of arr){
+			  					if(y){
+			  						longarr.push({url:"http://yaqin.ckun.vip/"+y})
+			  					}
+			  				}
+			  				response.data.data[x].imageList = arr
+			  				response.data.data[x].longimageList = longarr
+			  			}
 			  			console.log(response.data.data)
 			     that.tableData5 = response.data.data
+			     
 			  })
 			  .catch(function(error) {
 			    console.log(error)
 			  })
    	},
-   	addTicket(){
+   	 fileListChange(file,fileList) {
+//      this.imageUrl = URL.createObjectURL(file.raw);
+           console.log(fileList)
+           this.shortimagelist = this.form.imageList
+           this.shortimagelist.push(file.res[0].path)
+           console.log(this.shortimagelist)
+      },
+   	addTicket() {
    		console.log(1234)
-   		this.dialogFormVisible = true;
+   		this.dialogFormVisible = true
    		this.form = {
         name: '',
-        level:'',
+        level: '',
         address: '',
         category: '',
-        sum_start_time:'',
-        sum_end_time:'',
-        winter_start_time:'',
-        winter_end_time:'',
+        sum_start_time: '',
+        sum_end_time: '',
+        winter_start_time: '',
+        winter_end_time: '',
         price: '',
-        introduce:'',
+        introduce: ''
       }
-// 		this.form.introduce = ''
+      // 		this.form.introduce = ''
    	},
     hand: function(e) {},
-    exit: function(o,e) {
+    exit: function(o, e) {
       console.log(e)
       this.dialogFormVisible = true
       this.fromIndex = e
       console.log(this.form)
       this.form = this.tableData5[e]
+      this.form.imageList = this.form.imageList?this.form.imageList:[];
       this.form.introduce = this.tableData5[e].introduce
-      console.log(this.form, this.tableData5[e])
+      console.log(this.form)
     },
     complate: function() {
-//    this.tableData5[this.fromIndex] = this.form
-			console.log(this.form) 
-			var that = this
-			var params = new URLSearchParams()
-			params.append('data', JSON.stringify(this.form))
-			axios.post('http://yaqin.ckun.vip:3002/scenic_spot_second/edit', params)
+      //    this.tableData5[this.fromIndex] = this.form
+      console.log(this.form)
+      var that = this
+      this.form.imageList = this.shortimagelist
+      console.log(this.form)
+      var params = new URLSearchParams()
+      params.append('data', JSON.stringify(this.form))
+      axios.post('http://yaqin.ckun.vip:3002/scenic_spot_second/edit', params)
 			  .then(function(response) {
 			    console.log(response); if (response.data.code == 0) { that.getlist() }
 			    that.dialogFormVisible = false
@@ -272,12 +300,12 @@ export default {
       this.dialogFormVisible = false
     },
     handleClose(done) {
-//    this.fromIndex = done
-			var that = this
+      //    this.fromIndex = done
+      var that = this
       this.$confirm('确认删除？')
         .then(_ => {
-//        this.tableData5.splice(this.fromIndex, 1)
-					axios.get('http://yaqin.ckun.vip:3002/scenic_spot_second/delete?id=' + done)
+          //        this.tableData5.splice(this.fromIndex, 1)
+          axios.get('http://yaqin.ckun.vip:3002/scenic_spot_second/delete?id=' + done)
             .then(function(response) {
               if (response.data.code == 0) { that.getlist() }
             })
@@ -287,14 +315,13 @@ export default {
         })
         .catch(_ => {})
     },
-    create(){
+    create() {
     		console.log(this.form)
     		var data = []
       for (const x in this.form) {
-      		if(x == "id"){
-      			
-      		}else{
-      			
+      		if (x == 'id') {
+
+      		} else {
       			data.push(this.form[x])
       		}
       }
@@ -310,9 +337,6 @@ export default {
 			    console.log(error)
 			  })
     }
-  },
-  created() {
-      this.getlist()
   }
 }
 </script>

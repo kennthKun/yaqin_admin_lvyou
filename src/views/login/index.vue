@@ -63,7 +63,7 @@
           </span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
         </div>-->
-<!--
+        <!--
         <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           {{ $t('login.thirdparty') }}
         </el-button>-->
@@ -172,7 +172,7 @@ export default {
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
             		console.log(22332322)
-//          		console.log(this.redirect)
+              //          		console.log(this.redirect)
               this.$router.push({ path: '/' })
               this.loading = false
             })

@@ -30,11 +30,11 @@ const mutations = {
 
 const actions = {
   // user login
- 
+
   login({ commit }, data) {
-  	 	var that = this;	
+  	 	var that = this
     const { username, password } = data
-//  console.log(data)
+    //  console.log(data)
     var params = new URLSearchParams()
     params.append('username', data.username)
     params.append('password', data.password)
@@ -44,8 +44,8 @@ const actions = {
 	    if (response.data.code == 20000) {
 	    		console.log(response)
 	    		commit('SET_TOKEN', response.data.data)
-        setToken( response.data.data)
-//      that.$router.push({ path: '/' })
+          setToken(response.data.data)
+          //      that.$router.push({ path: '/' })
 	    }
 	  }).catch(function(error) {
 	    console.log(error)
@@ -54,46 +54,46 @@ const actions = {
 
   // get user info
   getInfo({ commit, state }) {
-//  return new Promise((resolve, reject) => {
-//    getInfo(state.token).then(response => {
-//      const { data } = response
-//
-//      if (!data) {
-//        reject('Verification failed, please Login again.')
-//      }
-//
-//      const { roles, name, avatar, introduction } = data
-//
-//      // roles must be a non-empty array
-//      if (!roles || roles.length <= 0) {
-//        reject('getInfo: roles must be a non-null array!')
-//      }
-//				console.log(data)
-        commit('SET_ROLES', ["admin"])
-        commit('SET_NAME', "Super Admin")
-        commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
-        commit('SET_INTRODUCTION', "I am a super administrator")
-        return {roles:["damin"]}
-//      resolve(data)
-//    }).catch(error => {
-//      reject(error)
-//    })
-//  })
+    //  return new Promise((resolve, reject) => {
+    //    getInfo(state.token).then(response => {
+    //      const { data } = response
+    //
+    //      if (!data) {
+    //        reject('Verification failed, please Login again.')
+    //      }
+    //
+    //      const { roles, name, avatar, introduction } = data
+    //
+    //      // roles must be a non-empty array
+    //      if (!roles || roles.length <= 0) {
+    //        reject('getInfo: roles must be a non-null array!')
+    //      }
+    //				console.log(data)
+    commit('SET_ROLES', ['admin'])
+    commit('SET_NAME', 'Super Admin')
+    commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
+    commit('SET_INTRODUCTION', 'I am a super administrator')
+    return { roles: ['damin'] }
+    //      resolve(data)
+    //    }).catch(error => {
+    //      reject(error)
+    //    })
+    //  })
   },
 
   // user logout
   logout({ commit, state }) {
-//  return new Promise((resolve, reject) => {
-//    logout(state.token).then(() => {
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        removeToken()
-        resetRouter()
-//      resolve()
-//    }).catch(error => {
-//      reject(error)
-//    })
-//  })
+    //  return new Promise((resolve, reject) => {
+    //    logout(state.token).then(() => {
+    commit('SET_TOKEN', '')
+    commit('SET_ROLES', [])
+    removeToken()
+    resetRouter()
+    //      resolve()
+    //    }).catch(error => {
+    //      reject(error)
+    //    })
+    //  })
   },
 
   // remove token
