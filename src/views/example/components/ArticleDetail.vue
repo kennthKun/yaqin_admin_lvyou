@@ -116,6 +116,7 @@ export default {
     return {
       postForm: Object.assign({}, defaultForm),
       loading: false,
+      type:0,
       userListOptions: [],
       rules: {
         image_uri: [{ validator: validateRequire }],
@@ -143,6 +144,8 @@ export default {
     }
   },
   created() {
+  		
+  		
     if (this.isEdit) {
       const id = this.$route.params && this.$route.params.id
       console.log(this.$route.params)
@@ -173,8 +176,16 @@ export default {
     },
     submitForm() {
       console.log(this.postForm)
+      this.postForm.type = this.type
       var params = new URLSearchParams()
       var that = this
+      console.log(this.$route)
+  			if(this.$route.name == "SpecialtyArticleList"){
+  				this.postForm.type = 0
+  			}else if(this.$route.name == "DeliciousArticleList"){
+  				this.postForm.type = 1
+  			}
+  			console.log(this.postForm)
       params.append('data', JSON.stringify(this.postForm))
       axios.post('http://localhost:3002/specialty/add', params)
 			  .then(function(response) {

@@ -109,9 +109,16 @@ export default {
   },
   methods: {
   		getList() {
+  			console.log(this.$route.name)
+  			var type
+  			if(this.$route.name == "SpecialtyArticleList"){
+  				type = 0
+  			}else if(this.$route.name == "DeliciousArticleList"){
+  				type = 1
+  			}
   			var that = this;
   			this.listLoading = true;
-   		axios.get('http://localhost:3002/specialty/api')
+   		axios.get('http://localhost:3002/specialty/api?type='+type)
 			  .then(function(response) {
 			  			console.log(response)
 			  			that.list = response.data.data;
