@@ -21,7 +21,7 @@
               <el-row>
                 <el-col :span="8">
                   <el-form-item label-width="60px" label="Author:" class="postInfo-container-item">
-                    <el-select v-model="postForm.author" :remote-method="getRemoteUserList" filterable default-first-option remote placeholder="Search user">
+                    <el-select v-model="postForm.author"  filterable default-first-option remote placeholder="Search user">
                       <el-option v-for="(item,index) in userListOptions" :key="item+index" :label="item" :value="item" />
                     </el-select>
                   </el-form-item>
@@ -52,6 +52,13 @@
         <el-form-item prop="content" style="margin-bottom: 30px;">
           <Tinymce ref="editor" v-model="postForm.content" :height="400" />
         </el-form-item>
+        
+        <el-form-item style="margin-bottom: 30px;" label="轮播图上传：">
+          <el-upload class="upload-demo" action="http://yaqin.ckun.vip:8081/file_upload" :file-list="postForm.longimageList" :on-success="fileListChange" :on-remove="fileremove" list-type="picture">
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
       </div>
     </el-form>
   </div>
@@ -74,7 +81,8 @@ const defaultForm = {
   title: '', // 文章题目
   content: '', // 文章内容
   display_time: undefined, // 时间
-  importance: 0
+  importance: 0,
+  imageList:[],
 }
 
 export default {
@@ -117,7 +125,10 @@ export default {
       postForm: Object.assign({}, defaultForm),
       loading: false,
       type:0,
-      userListOptions: [],
+      imageUrl:"",
+      longimageList:[],
+      shortimagelist:[],
+      userListOptions: ["ckun","xiaolei","yaqin"],
       rules: {
         image_uri: [{ validator: validateRequire }],
         title: [{ validator: validateRequire }],
@@ -128,6 +139,7 @@ export default {
     }
   },
   computed: {
+  		
     contentShortLength() {
       return this.postForm.content_short.length
     },
@@ -156,13 +168,38 @@ export default {
     this.tempRoute = Object.assign({}, this.$route)
   },
   methods: {
+  		fileListChange(file,fileList) {
+//      this.imageUrl = URL.createObjectURL(file.raw);
+         console.log(file)
+         this.shortimagelist.push(file.res[0].path)
+         console.log(this.shortimagelist)
+    },
+    fileremove(file, fileList){
+    		console.log(file.url)
+    		console.log(fileList)
+//  		this.
+    },
     fetchData(id) {
+    		console.log(23456)
     		var that = this
-    		axios.get('http://localhost:3002/specialty/details?id='+id)
+    		axios.get('http://yaqin.ckun.vip:3002/specialty/details?id='+id)
 			  .then(function(response) {
 			  			console.log(response)
+			  			for(let x in response.data.data){
+			  				let arr = response.data.data[x].imageList.split(",")
+			  				let longarr = [];
+			  				for(let y of arr){
+			  					if(y){
+			  						longarr.push({url:"http://yaqin.ckun.vip/"+y})
+			  					}
+			  				}
+			  				response.data.data[x].imageList = arr
+			  				response.data.data[x].longimageList = longarr
+			  			}
+			  			console.log(response.data.data[0])
 			  			that.postForm = response.data.data[0];
 			  			that.postForm.importance = parseInt(response.data.data[0].importance)
+			  			that.shortimagelist = that.postForm.imageList
 			  			that.setTagsViewTitle()
 			  })
 			  .catch(function(error) {
@@ -180,14 +217,18 @@ export default {
       var params = new URLSearchParams()
       var that = this
       console.log(this.$route)
-  			if(this.$route.name == "SpecialtyArticleList"){
+  			if(this.$route.name == "SpecialtyArticleList"||this.$route.name == "SpecialtyEditArticle"){
   				this.postForm.type = 0
-  			}else if(this.$route.name == "DeliciousArticleList"){
+  			}else if(this.$route.name == "DeliciousCreateArticle" ||this.$route.name == "DeliciousEditArticle"){
   				this.postForm.type = 1
+  			}else if(this.$route.name=="StrategyCreateArticle" ||this.$route.name=="StrategyEditArticle"){
+  				this.postForm.type = 2
   			}
   			console.log(this.postForm)
+  			console.log(this.shortimagelist)
+			this.postForm.imageList = this.shortimagelist
       params.append('data', JSON.stringify(this.postForm))
-      axios.post('http://localhost:3002/specialty/add', params)
+      axios.post('http://yaqin.ckun.vip:3002/specialty/add', params)
 			  .then(function(response) {
 			    console.log(response); 
 			    if (response.data.code == 0) {
@@ -207,12 +248,6 @@ export default {
 			    console.log(error)
 			  })
     },
-    getRemoteUserList(query) {
-      searchUser(query).then(response => {
-        if (!response.data.items) return
-        this.userListOptions = response.data.items.map(v => v.name)
-      })
-    }
   }
 }
 </script>

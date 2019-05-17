@@ -36,7 +36,7 @@
               </el-upload>
             </el-form-item>
             <el-form-item label="操作">
-              <el-button type="primary" @click="exit(props.row.id)">编辑</el-button>
+              <!--<el-button type="primary" @click="exit(props.row.id)">编辑</el-button>-->
               <!-- 删除操作 -->
               <el-button type="danger" @click="handleClose(props.row.id)">删除</el-button>
 

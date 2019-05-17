@@ -250,7 +250,7 @@ export default {
 
     getlist() {
       var that = this
-      axios.get('http://localhost:3002/drivers/api')
+      axios.get('http://yaqin.ckun.vip:3002/drivers/api')
         .then(function(response) {
           that.tableData5 = response.data.data
           console.log(that.tableData5)

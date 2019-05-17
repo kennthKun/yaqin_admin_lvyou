@@ -68,7 +68,7 @@ export const constantRoutes = [
   {
     path: '/Strategy',
     component: Layout,
-    redirect: '/Strategy/list',
+    redirect: '/example/list',
     name: 'Strategy',
     meta: {
       title: 'Strategy',
@@ -76,21 +76,21 @@ export const constantRoutes = [
     },
     children: [
       {
-        path: 'example/create',
-        component: () => import('@/views/strategy/example/create'),
+        path: 'create',
+        component: () => import('@/views/example/create'),
         name: 'StrategyCreateArticle',
         meta: { title: 'createArticle', icon: 'edit' }
       },
       {
         path: 'edit/:id(\\d+)',
-        component: () => import('@/views/strategy/example/edit'),
+        component: () => import('@/views/example/edit'),
         name: 'StrategyEditArticle',
         meta: { title: 'editArticle', noCache: true, activeMenu: '/example/list' },
         hidden: true
       },
       {
         path: 'list',
-        component: () => import('@/views/strategy/example/list'),
+        component: () => import('@/views/example/list'),
         name: 'StrategyArticleList',
         meta: { title: 'articleList', icon: 'list' }
       }

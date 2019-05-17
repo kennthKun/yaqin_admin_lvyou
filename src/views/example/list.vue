@@ -115,10 +115,12 @@ export default {
   				type = 0
   			}else if(this.$route.name == "DeliciousArticleList"){
   				type = 1
+  			}else if(this.$route.name == "StrategyArticleList"){
+  				type = 2
   			}
   			var that = this;
   			this.listLoading = true;
-   		axios.get('http://localhost:3002/specialty/api?type='+type)
+   		axios.get('http://yaqin.ckun.vip:3002/specialty/api?type='+type)
 			  .then(function(response) {
 			  			console.log(response)
 			  			that.list = response.data.data;
@@ -132,7 +134,7 @@ export default {
    	deletebtn(id){
    		console.log(id)
    		var that = this
-   		axios.get('http://localhost:3002/specialty/delete?id='+id)
+   		axios.get('http://yaqin.ckun.vip:3002/specialty/delete?id='+id)
 			  .then(function(response) {
 			  			console.log(response)
 			  			that.getList();
