@@ -48,6 +48,11 @@
                   <el-form-item label="酒店价格" :label-width="formLabelWidth">
                     <el-input v-model="form.price" auto-complete="off" />
                   </el-form-item>
+                  <el-form-item label="所属地区" :label-width="formLabelWidth">
+					          <el-select v-model="form.areaid" placeholder="请选择地区">
+					            <el-option v-for='item in area' :label="item.name" :value="item.id" />
+					          </el-select>
+					        </el-form-item>
                   <el-form-item label="酒店地址" :label-width="formLabelWidth">
                     <el-input v-model="form.address" auto-complete="off" />
                   </el-form-item>
@@ -89,6 +94,11 @@
         </el-form-item>
         <el-form-item label="酒店电话" :label-width="formLabelWidth">
           <el-input v-model="form.phone" auto-complete="off" />
+        </el-form-item>
+        <el-form-item label="所属地区" :label-width="formLabelWidth">
+          <el-select v-model="form.areaid" placeholder="请选择地区">
+            <el-option v-for='item in area' :label="item.name" :value="item.id" />
+          </el-select>
         </el-form-item>
         <el-form-item label="酒店地址" :label-width="formLabelWidth">
           <el-input v-model="form.address" auto-complete="off" />
@@ -149,9 +159,11 @@ export default {
         name: '',
         address: '',
         phone:'',
+        areaid:'',
         price: '',
         introduce: '',
       },
+      area:[],
       shortimagelist:[],
       formLabelWidth: '115px',
       tableData5: []
@@ -159,11 +171,24 @@ export default {
   },
   created() {
     this.getlist()
+    this.getjingqu()
   },
   methods: {
+  	getjingqu(){
+  			var that = this
+  			axios.get('http://yaqin.ckun.vip:3002/scenic_spot_second/api')
+			  .then(function(response) {
+			  			
+						that.area = response.data.data		
+						console.log(that.area)
+			  })
+			  .catch(function(error) {
+			    console.log(error)
+			  })
+  		},
   		getlist() {
   			var that = this
-   		axios.get('http://localhost:3002/hotel/api')
+   		axios.get('http://yaqin.ckun.vip:3002/hotel/api')
 			  .then(function(response) {
 			  			for(let x in response.data.data){
 			  				let arr = response.data.data[x].imageList.split(",")
@@ -199,6 +224,7 @@ export default {
         name: '',
         address: '',
         phone:'',
+        areaid:'',
         price: '',
         introduce: '',
       }
@@ -223,7 +249,7 @@ export default {
       console.log(this.form)
       var params = new URLSearchParams()
       params.append('data', JSON.stringify(this.form))
-      axios.post('http://localhost:3002/hotel/add', params)
+      axios.post('http://yaqin.ckun.vip:3002/hotel/add', params)
 			  .then(function(response) {
 			    console.log(response); if (response.data.code == 0) { that.getlist() }
 			    that.dialogFormVisible = false
@@ -238,7 +264,7 @@ export default {
       this.$confirm('确认删除？')
         .then(_ => {
           //        this.tableData5.splice(this.fromIndex, 1)
-          axios.get('http://localhost:3002/hotel/delete?id=' + done)
+          axios.get('http://yaqin.ckun.vip:3002/hotel/delete?id=' + done)
             .then(function(response) {
               if (response.data.code == 0) { that.getlist() }
             })
@@ -254,7 +280,7 @@ export default {
       var that = this
       var params = new URLSearchParams()
       params.append('data', JSON.stringify(this.form))
-      axios.post('http://localhost:3002/hotel/add', params)
+      axios.post('http://yaqin.ckun.vip:3002/hotel/add', params)
 			  .then(function(response) {
 			    console.log(response); if (response.data.code == 0) { that.getlist() }
 			    that.dialogFormVisible = false
