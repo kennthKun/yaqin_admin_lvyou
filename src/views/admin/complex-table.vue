@@ -1,68 +1,77 @@
 <template>
-  <!--<el-table :data="tableData" border style="width: 100%">
-    <el-table-column fixed prop="date" label="日期" width="150"></el-table-column>
-    <el-table-column prop="name" label="姓名" width="120"></el-table-column>
-    <el-table-column prop="province" label="省份" width="120"></el-table-column>
-    <el-table-column prop="city" label="市区" width="120"></el-table-column>
-    <el-table-column prop="address" label="地址" width="300"></el-table-column>
-    <el-table-column prop="zip" label="邮编" width="120"></el-table-column>
-    <el-table-column fixed="right" label="操作" width="100">
-      <template slot-scope="scope">
-        <el-button @click="handleClick(scope.$index)" type="text" size="small">查看</el-button>
-        <el-button type="text" size="small">编辑</el-button>
-      </template>
-    </el-table-column>
-  </el-table>-->
+	<div style="padding: 30px;box-sizing: border-box;">
+		<template>
+			<el-table :data="tableData5" style="width: 100%">
+				<el-table-column label="用户帐号" prop="username" align="center" />
+				<el-table-column label="用户名称" prop="name" align="center" />
+				<el-table-column label="用户电话" prop="phone" align="center" />
+				<el-table-column label="用户头像" prop="price" align="center">
+					<template slot-scope="scope">
+						<img style="width: 50px;height: 50px;border-radius: 50%;border: 5px solid #f3f3f3;" :src="'http://yaqin.ckun.vip/'+scope.row.photo" />
+					</template>
+				</el-table-column>
+
+			</el-table>
+		</template>
+	</div>
+	<!--  -->
 </template>
 
-<script>
-export default {
-//methods: {
-//  handleClick(row) {
-//    console.log(row);
-//  }
-//},
-//
-//data() {
-//  return {
-//    tableData: [
-//      {
-//        date: "2016-05-03",
-//        name: "王小虎",
-//        province: "上海",
-//        city: "普陀区",
-//        address: "上海市普陀区金沙江路 1518 弄",
-//        zip: 200333
-//      },
-//      {
-//        date: "2016-05-02",
-//        name: "王小虎",
-//        province: "上海",
-//        city: "普陀区",
-//        address: "上海市普陀区金沙江路 1518 弄",
-//        zip: 200333
-//      },
-//      {
-//        date: "2016-05-04",
-//        name: "王小虎",
-//        province: "上海",
-//        city: "普陀区",
-//        address: "上海市普陀区金沙江路 1518 弄",
-//        zip: 200333
-//      },
-//      {
-//        date: "2016-05-01",
-//        name: "王小虎",
-//        province: "上海",
-//        city: "普陀区",
-//        address:"上海市普陀区金沙江路1518弄",
-//        zip: 200333
-//      }
-//    ]
-//  }
-//}
-}
-</script>
 <style>
+	.demo-table-expand {
+		font-size: 0;
+	}
+	
+	.demo-table-expand label {
+		width: 90px;
+		color: #99a9bf;
+	}
+	
+	.el-dialog {
+		width: 65%;
+	}
+	
+	.el-form-item--medium .el-form-item__content {
+		width: 60%;
+	}
+	
+	.demo-table-expand .el-form-item {
+		margin-right: 0;
+		margin-bottom: 0;
+		width: 100% !important;
+	}
+</style>
 
+<script>
+	import axios from 'axios'
+	export default {
+		components: {},
+		data() {
+			return {
+				tableData5: [],
+			}
+		},
+		created() {
+			this.getlist()
+		},
+		methods: {
+			getlist() {
+				var that = this
+				axios.get('http://yaqin.ckun.vip:3002/user/api')
+					.then(function(response) {
+						console.log(response.data.data)
+						that.tableData5 = response.data.data
+
+					})
+					.catch(function(error) {
+						console.log(error)
+					})
+			}
+		}
+	}
+</script>
+<style scoped>
+	.demo-table-expand .el-form-item {
+		width: 70%;
+	}
 </style>

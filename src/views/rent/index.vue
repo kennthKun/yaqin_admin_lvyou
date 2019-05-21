@@ -60,7 +60,7 @@
                     <Tinymce ref="editor" v-model="form.introduce" :height="400" />
                   </el-form-item>
 								<el-form-item label="司机图片">
-			              <el-upload class="upload-demo" action="http://yaqin.ckun.vip:8081/file_upload" :file-list="form.longimageList" :on-success="fileListChange" list-type="picture">
+			              <el-upload class="upload-demo" action="http://yaqin.ckun.vip:8081/file_upload" :file-list="form.longimageList" :on-success="fileListChange" list-type="picture" :on-remove="removeImg">
 			                <el-button size="small" type="primary">点击上传</el-button>
 			                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 			              </el-upload>
@@ -110,7 +110,7 @@
           <Tinymce ref="editor" v-model="form.introduce" :height="400" />
         </el-form-item>
         <el-form-item label="司机图片">
-          <el-upload class="upload-demo" action="http://yaqin.ckun.vip:8081/file_upload" :file-list="form.longimageList" :on-success="fileListChange" list-type="picture">
+          <el-upload class="upload-demo" action="http://yaqin.ckun.vip:8081/file_upload" :file-list="form.longimageList" :on-success="fileListChange" list-type="picture" :on-remove="removeImg">
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
@@ -186,6 +186,20 @@ export default {
 			    console.log(error)
 			  })
   		},
+  		removeImg(file, fileList) {
+				console.log(file)
+				console.log(fileList)
+				this.imgarr = fileList
+				this.shortimagelist = [];
+				for(let x in fileList){
+					if(fileList[x].response){
+						this.shortimagelist.push(fileList[x].response.res[0].path)
+					}else{
+						this.shortimagelist.push(fileList[x].url.replace("http://yaqin.ckun.vip/",""))
+					}
+				}
+				console.log(this.shortimagelist)
+			},
   		getlist() {
   			var that = this
    		axios.get('http://yaqin.ckun.vip:3002/drivers/api')
